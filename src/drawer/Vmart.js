@@ -2,16 +2,88 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import {  Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import { SearchBar } from 'react-native-elements';
+import VmartItem from '../component/VmartItem';
+
+const data2 = [
+    {
+        id: '1',
+        name: 'Socola',
+        price: '$5.99',
+        image: require('../../assets/socola.png'),
+    },
+    {
+        id: '2',
+        name: 'Socola',
+        price: '$5.99',
+        image: require('../../assets/socola.png'),
+    },
+    {
+        id: '3',
+        name: 'Socola',
+        price: '$5.99',
+        image: require('../../assets/socola.png'),
+    },
+    {
+        id: '4',
+        name: 'Socola',
+        price: '$5.99',
+        image: require('../../assets/socola.png'),
+    },
+    {
+        id: '5',
+        name: 'Socola',
+        price: '$5.99',
+        image: require('../../assets/socola.png'),
+    },
+    {
+        id: '6',
+        name: 'Socola',
+        price: '$5.99',
+        image: require('../../assets/socola.png'),
+    },
+    {
+        id: '7',
+        name: 'Socola',
+        price: '$5.99',
+        image: require('../../assets/socola.png'),
+    },
+    {
+        id: '8',
+        name: 'Socola',
+        price: '$5.99',
+        image: require('../../assets/socola.png'),
+    },
+]
 
 const Stack = createStackNavigator();
 
-function VmartScreen() {
+const formatData = (data, numColumns) => {
+    const full = Math.floor(data.length / numColumns);
+    let numLastRow = data.length - (full * numColumns);
+    while (numLastRow !== numColumns && numLastRow !== 0) {
+        data.push({ _id: numLastRow, empty: true });
+        numLastRow++;
+    }
+    return data;
+};
+
+function VmartScreen({ navigation }) {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>hi</Text>
-        </View>
+        <View style={styles.container}>
+            <View>
+                <FlatList
+                    data={formatData(data2, 2)}
+                    numColumns={2}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => <VmartItem data={item} onPress={() => {}} />}
+                    contentContainerStyle={{ paddingLeft: 11, paddingRight: 11 }}
+                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
+                />
+            </View>
+        </View >
     );
 }
 
@@ -41,4 +113,9 @@ const Vmart = ({navigation}) => {
 
 export default Vmart
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff'
+    }
+})

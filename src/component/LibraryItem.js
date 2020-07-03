@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const CanteenItem = (props) => {
+const LibraryItem = (props) => {
     const { data, onPress } = props;
     return (
         <View style={styles.container}>
@@ -10,7 +10,7 @@ const CanteenItem = (props) => {
                 <TouchableOpacity activeOpacity={0.5} style={styles.itemBtn} onPress={onPress}>
                     <View style={styles.item}>
                         <View style={styles.img}>
-                            <Image style={styles.canteenImage} source={data.image} />
+                            <Image style={styles.LibraryImage} source={data.image} />
                         </View>
                         <View style={styles.info}>
                             <View style={styles.priceRow}>
@@ -25,12 +25,12 @@ const CanteenItem = (props) => {
     )
 }
 
-export default CanteenItem
+export default LibraryItem
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f9faff',
+        backgroundColor: '#fff',
     },
     itemContainer: {
         flex: 1,
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         padding: 8
     },
     img: {
-        height: 120,
+        height: 150,
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 4,
         alignItems: 'center',
@@ -61,13 +61,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     price: {
-        fontSize: 25,
+        fontSize: 20,
         color: '#000',
         fontWeight: "bold",
         flex: 1,
         marginBottom: 10,
     },
-    canteenImage: {
+    LibraryImage: {
         width: 130,
         height: 130,
     },

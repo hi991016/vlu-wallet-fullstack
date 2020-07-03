@@ -55,7 +55,7 @@ export default ProfileScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f9faff',
+        backgroundColor: '#fff',
     },
     image: {
         borderRadius: 360,
@@ -108,6 +108,6 @@ const styles = StyleSheet.create({
     },
     scrollView: {
         flex: 1,
-        backgroundColor: '#f9faff'
+        backgroundColor: '#fff'
     },
 })

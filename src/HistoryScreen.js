@@ -112,7 +112,7 @@ export default class HistoryScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f9faff',
+        backgroundColor: '#fff',
     },
     panelContainer: {
         borderWidth: 0.8,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     searchContainer: {
-        backgroundColor: '#f7f6ff',
+        backgroundColor: '#fff',
         borderBottomColor: 'transparent',
         borderTopColor: 'transparent',
         paddingHorizontal: 20,

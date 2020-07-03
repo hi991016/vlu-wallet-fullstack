@@ -14,8 +14,6 @@ import HistoryScreen from './HistoryScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import ChangePassword from './ChangePassword';
-import DetailCanteen from './DetailCanteen';
-import Canteen from './drawer/Canteen';
 
 const Tab = createBottomTabNavigator();
 

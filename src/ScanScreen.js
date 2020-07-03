@@ -5,7 +5,7 @@ import BackgroundHeader from './component/BackgroundHeader'
 const ScanScreen = () => {
     return (
         <>
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f9faff' }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
                 <Text></Text>
             </View>
         </>
