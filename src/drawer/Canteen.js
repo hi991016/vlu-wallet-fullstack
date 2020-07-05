@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Dimensions, Animated, Image } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Animated, Image, StatusBar } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, FlatList, ScrollView } from 'react-native-gesture-handler';
@@ -26,7 +26,7 @@ const data = [
     {
         id: '3',
         name: 'Bounce Rice',
-        price: '$10.99',
+        price: '$11.99',
         image: require('../../assets/rice.png'),
     },
     {
@@ -74,87 +74,109 @@ const formatData = (data, numColumns) => {
     return data;
 };
 
-function CanteenScreen({ navigation }) {
-    return (
-        <View style={styles.container}>
-            <View>
-                <FlatList
-                    data={formatData(data, 2)}
-                    numColumns={2}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) => <CanteenItem data={item} onPress={() => { navigation.navigate('Detail Canteen', { detail: item }); }} />}
-                    contentContainerStyle={{ paddingLeft: 11, paddingRight: 11 }}
-                    showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}
-                />
-            </View>
-            <View style={{ flex: 1 }}>
-                <SlidingUpPanel
-                    ref={null}
-                    draggableRange={{ top: height - 130, bottom: 30 }}
-                    backdropOpacity={0}
-                    animatedValue={_draggedValue}
-                    snappingPoints={[360]}
-                    height={height + 20}
-                    friction={0.9}
-                >
-                    <View style={{ flex: 1, backgroundColor: '#000', borderTopRightRadius: 30, borderTopLeftRadius: 30, padding: 10,}}>
-                        <View style={styles.PanelHandle}></View>
-                        <ScrollView>
-                            <View style={styles.cart}>
-                                <Text style={{ color: '#fff', fontSize: 28, fontWeight: 'bold', }}>Cart</Text>
-                                <View style={styles.bgCart}>
-                                    <Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}>2</Text>
-                                </View>
-                            </View>
-                            <View style={{ marginTop: 8 }}>
-                                <View style={styles.panelCart}>
-                                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <Image source={require('../../assets/rice.png')} style={{ width: 70, height: 70, borderRadius: 120 }} />
-                                        <Text style={{ color: '#fff', fontSize: 17 }}>1</Text>
-                                        <Text style={{ color: '#fff', fontSize: 17 }}>x</Text>
-                                    </View>
-                                    <View style={{ flex: 1, paddingHorizontal: 25 }}>
-                                        <Text numberOfLines={3} style={{ color: '#fff', fontSize: 17, fontWeight: 'bold' }}>Rice with Grilled Pork Chop</Text>
-                                    </View>
-                                    <View>
-                                        <Text style={{ color: '#919090', fontSize: 17 }}>$7.99</Text>
-                                    </View>
-                                </View>
-                                <View style={styles.panelCart}>
-                                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <Image source={require('../../assets/rice.png')} style={{ width: 70, height: 70, borderRadius: 120 }} />
-                                        <Text style={{ color: '#fff', fontSize: 17 }}>1</Text>
-                                        <Text style={{ color: '#fff', fontSize: 17 }}>x</Text>
-                                    </View>
-                                    <View style={{ flex: 1, paddingHorizontal: 25 }}>
-                                        <Text numberOfLines={3} style={{ color: '#fff', fontSize: 17, fontWeight: 'bold' }}>Bounce Rice</Text>
-                                    </View>
-                                    <View>
-                                        <Text style={{ color: '#919090', fontSize: 17 }}>$11.99</Text>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={styles.totalCart}>
-                                <Text style={{ color: '#919090', fontSize: 25 }}>Total:</Text>
-                                <Text style={{ color: '#fff', fontSize: 33, fontWeight: 'bold' }}>$19.98</Text>
-                            </View>
-                            <View style={{ alignSelf: 'center' }}>
-                                <TouchableOpacity activeOpacity={0.7}>
-                                    <View style={styles.customButton}>
-                                        <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>
-                                            Order
-                                        </Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-                        </ScrollView>
+class CanteenScreen extends React.Component {
+    state = {
+        search: '',
+    };
 
+    updateSearch = (search) => {
+        this.setState({ search });
+    };
+
+    render() {
+        const { search } = this.state;
+        return (
+            <>
+                <StatusBar barStyle="dark-content" />
+                <View>
+                    <SearchBar
+                        placeholder="Search here"
+                        onChangeText={this.updateSearch}
+                        value={search}
+                        lightTheme round
+                        containerStyle={styles.searchContainer}
+                    />
+                </View>
+                <View style={styles.container}>
+                    <View>
+                        <FlatList
+                            data={formatData(data, 2)}
+                            numColumns={2}
+                            keyExtractor={item => item.id}
+                            renderItem={({ item }) => <CanteenItem data={item} onPress={() => { this.props.navigation.navigate('Detail Canteen', { detail: item }); }} />}
+                            contentContainerStyle={{ paddingLeft: 11, paddingRight: 11 }}
+                            showsVerticalScrollIndicator={false}
+                            showsHorizontalScrollIndicator={false}
+                        />
                     </View>
-                </SlidingUpPanel>
-            </View >
-        </View >
-    );
+                    <View style={{ flex: 1 }}>
+                        <SlidingUpPanel
+                            ref={null}
+                            draggableRange={{ top: height - 140, bottom: 30 }}
+                            backdropOpacity={0}
+                            animatedValue={_draggedValue}
+                            snappingPoints={[360]}
+                            height={height + 20}
+                            friction={0.9}
+                        >
+                            <View style={{ flex: 1, backgroundColor: '#000', borderTopRightRadius: 30, borderTopLeftRadius: 30, padding: 10, }}>
+                                <View style={styles.PanelHandle}></View>
+                                <ScrollView>
+                                    <View style={styles.cart}>
+                                        <Text style={{ color: '#fff', fontSize: 28, fontWeight: 'bold', }}>Cart</Text>
+                                        <View style={styles.bgCart}>
+                                            <Text style={{ color: '#000', fontSize: 20, fontWeight: 'bold' }}>2</Text>
+                                        </View>
+                                    </View>
+                                    <View style={{ marginTop: 8 }}>
+                                        <View style={styles.panelCart}>
+                                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <Image source={require('../../assets/rice.png')} style={{ width: 70, height: 70, borderRadius: 120 }} />
+                                                <Text style={{ color: '#fff', fontSize: 17 }}>1</Text>
+                                                <Text style={{ color: '#fff', fontSize: 17 }}>x</Text>
+                                            </View>
+                                            <View style={{ flex: 1, paddingHorizontal: 25 }}>
+                                                <Text numberOfLines={3} style={{ color: '#fff', fontSize: 17, fontWeight: 'bold' }}>Rice with Grilled Pork Chop</Text>
+                                            </View>
+                                            <View>
+                                                <Text style={{ color: '#919090', fontSize: 17 }}>$7.99</Text>
+                                            </View>
+                                        </View>
+                                        <View style={styles.panelCart}>
+                                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                <Image source={require('../../assets/rice.png')} style={{ width: 70, height: 70, borderRadius: 120 }} />
+                                                <Text style={{ color: '#fff', fontSize: 17 }}>1</Text>
+                                                <Text style={{ color: '#fff', fontSize: 17 }}>x</Text>
+                                            </View>
+                                            <View style={{ flex: 1, paddingHorizontal: 25 }}>
+                                                <Text numberOfLines={3} style={{ color: '#fff', fontSize: 17, fontWeight: 'bold' }}>Bounce Rice</Text>
+                                            </View>
+                                            <View>
+                                                <Text style={{ color: '#919090', fontSize: 17 }}>$11.99</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={styles.totalCart}>
+                                        <Text style={{ color: '#919090', fontSize: 25 }}>Total:</Text>
+                                        <Text style={{ color: '#fff', fontSize: 33, fontWeight: 'bold' }}>$19.98</Text>
+                                    </View>
+                                    <View style={{ alignSelf: 'center' }}>
+                                        <TouchableOpacity activeOpacity={0.7}>
+                                            <View style={styles.customButton}>
+                                                <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>
+                                                    Order
+                                        </Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>
+                                </ScrollView>
+                            </View>
+                        </SlidingUpPanel>
+                    </View >
+                </View >
+            </>
+        );
+    }
 }
 
 
@@ -166,9 +188,9 @@ const Canteen = ({ navigation }) => {
                 component={CanteenScreen}
                 options={{
                     title: 'Canteen',
-                    // headerStyle: {
-                    //     backgroundColor: "#e1e6ea",
-                    // },
+                    headerStyle: {
+                        backgroundColor: "#e1e6ea",
+                    },
                     headerTitleAlign: "center",
                     headerTintColor: '#434c73',
                     headerLeft: () => (
@@ -180,9 +202,6 @@ const Canteen = ({ navigation }) => {
             />
             <Stack.Screen name="Detail Canteen" component={DetailCanteen}
                 options={({ route }) => ({
-                    // headerStyle: {
-                    //     backgroundColor: "#fff",
-                    // },
                     headerTransparent: true,
                     headerTitleStyle: { color: '#000' },
                     headerTitleAlign: "center",
@@ -249,4 +268,12 @@ const styles = StyleSheet.create({
         width: 280,
         height: 50,
     },
+    searchContainer: {
+        backgroundColor: '#f9faff',
+        borderBottomColor: 'transparent',
+        borderTopColor: 'transparent',
+        paddingHorizontal: 20,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 })

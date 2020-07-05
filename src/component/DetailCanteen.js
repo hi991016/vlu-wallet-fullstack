@@ -58,7 +58,7 @@ class DetailCanteen extends Component {
                             <Text style={styles.price}>$7.99</Text>
                         </View>
                         <View style={{ alignSelf: 'center' }}>
-                            <TouchableOpacity activeOpacity={0.7}>
+                            <TouchableOpacity activeOpacity={0.7} onPress={() => this.props.navigation.goBack()}>
                                 <View style={styles.customButton}>
                                     <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>
                                         Add to Cart
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
         marginTop: 60,
         width: 300,
         height: 300,
+        borderRadius: 120,
     },
     price: {
         fontSize: 29,
