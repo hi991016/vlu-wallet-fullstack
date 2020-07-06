@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground,AsyncStorage } from 'react-native';
 import {
     Avatar,
     Title,
@@ -15,6 +15,12 @@ import { MaterialCommunityIcons, Feather, AntDesign, } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const DrawerContent = (props) => {
+  const [islogin, setIslogin] = React.useState(false);
+  React.useEffect(() => {
+      AsyncStorage.getItem('userToken', (err, result) => {
+        result != null? setIslogin(true):undefined;
+      });
+  }, []);
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
@@ -101,14 +107,25 @@ const DrawerContent = (props) => {
                 </View>
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawer}>
-                <DrawerItem
-                    icon={({ size }) => (
-                        <AntDesign name="poweroff" color='#1f2233' size={size} />
-                    )}
-                    label="Log Out"
-                    labelStyle={{ fontWeight: 'bold', color: '#1f2233' }}
-                // onPress={() => {}}
-                />
+                {!islogin?
+                  (  <DrawerItem
+                        icon={({ size }) => (
+                            <AntDesign name="login" color='#1f2233' size={size} />
+                        )}
+                        label="Đăng nhập"
+                        labelStyle={{ fontWeight: 'bold', color: '#1f2233' }}
+                        onPress={() => {props.navigation.navigate('StackLogin')}}
+                    />):
+                  (  <DrawerItem
+                      icon={({ size }) => (
+                          <AntDesign name="poweroff" color='#1f2233' size={size} />
+                      )}
+                      label="Đăng xuất"
+                      labelStyle={{ fontWeight: 'bold', color: '#1f2233' }}
+                  // onPress={() => {}}
+                  />)
+                }
+
             </Drawer.Section>
         </View>
     )
