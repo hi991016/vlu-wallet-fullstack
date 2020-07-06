@@ -7,6 +7,7 @@ import {
     Drawer,
     Paragraph,
 } from 'react-native-paper';
+var jwtDecode = require('jwt-decode');
 import {
     DrawerContentScrollView,
     DrawerItem
@@ -15,12 +16,22 @@ import { MaterialCommunityIcons, Feather, AntDesign, } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const DrawerContent = (props) => {
-  const [islogin, setIslogin] = React.useState(false);
-  React.useEffect(() => {
+    const{onPress} = props;
+    const [username, setUsername] = React.useState('');
+    const [name, setName] = React.useState('');
+    const [email, setEmail] = React.useState('');
+    const [wallet, setWallet] = React.useState(-1);
+    const [point, setPoint] = React.useState(-1);
+    React.useEffect(() => {
       AsyncStorage.getItem('userToken', (err, result) => {
-        result != null? setIslogin(true):undefined;
+        var decoded = jwtDecode(result);
+          setUsername(decoded.user);
+          setName(decoded.name);
+          setEmail(decoded.email);
+          setWallet(decoded.wallet);
+          setPoint(decoded.point);
       });
-  }, []);
+    }, []);
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
@@ -45,18 +56,18 @@ const DrawerContent = (props) => {
                                     />
                                 </TouchableOpacity>
                                 <View style={{ marginLeft: 15, flexDirection: 'column', marginTop: -4 }}>
-                                    <Title style={styles.title}>Cáo</Title>
-                                    <Caption style={styles.caption}>@vanlanguni.vn</Caption>
+                                    <Title style={styles.title}>{name}</Title>
+                                    <Caption style={styles.caption}>{email}</Caption>
                                 </View>
                             </View>
                             <View style={styles.row}>
                                 <View style={styles.section}>
-                                    <Caption style={styles.caption}>Balance: </Caption>
-                                    <Paragraph style={[styles.paragraph, styles.caption]}>$1016</Paragraph>
+                                    <Caption style={styles.caption}>Số dư: </Caption>
+                                    <Paragraph style={[styles.paragraph, styles.caption]}>{wallet}</Paragraph>
                                 </View>
                                 <View style={styles.section}>
-                                    <Caption style={styles.caption}>Point: </Caption>
-                                    <Paragraph style={[styles.paragraph, styles.caption]}>11</Paragraph>
+                                    <Caption style={styles.caption}>VPoint: </Caption>
+                                    <Paragraph style={[styles.paragraph, styles.caption]}>{point}</Paragraph>
                                 </View>
                             </View>
                         </View>
@@ -67,7 +78,7 @@ const DrawerContent = (props) => {
                             icon={({ size }) => (
                                 <AntDesign name="home" color='#1f2233' size={size} />
                             )}
-                            label="Home"
+                            label="Trang chủ"
                             onPress={() => { props.navigation.navigate('Home') }}
                             labelStyle={{ color: '#1f2233' }}
                         />
@@ -75,7 +86,7 @@ const DrawerContent = (props) => {
                             icon={({ size }) => (
                                 <AntDesign name="user" color='#1f2233' size={size} />
                             )}
-                            label="Profile"
+                            label="Thông tin tài khoản"
                             onPress={() => { props.navigation.navigate('Profile') }}
                             labelStyle={{ color: '#1f2233' }}
                         />
@@ -83,7 +94,7 @@ const DrawerContent = (props) => {
                             icon={({ size }) => (
                                 <MaterialCommunityIcons name="food" color='#1f2233' size={size} />
                             )}
-                            label="Canteen"
+                            label="Căn tin"
                             onPress={() => { props.navigation.navigate('Canteen') }}
                             labelStyle={{ color: '#1f2233' }}
                         />
@@ -99,7 +110,7 @@ const DrawerContent = (props) => {
                             icon={({ size }) => (
                                 <Feather name="book" color='#1f2233' size={size} />
                             )}
-                            label="Library"
+                            label="Thư viện"
                             onPress={() => { props.navigation.navigate('Library') }}
                             labelStyle={{ color: '#1f2233' }}
                         />
@@ -107,24 +118,14 @@ const DrawerContent = (props) => {
                 </View>
             </DrawerContentScrollView>
             <Drawer.Section style={styles.bottomDrawer}>
-                {!islogin?
-                  (  <DrawerItem
-                        icon={({ size }) => (
-                            <AntDesign name="login" color='#1f2233' size={size} />
-                        )}
-                        label="Đăng nhập"
-                        labelStyle={{ fontWeight: 'bold', color: '#1f2233' }}
-                        onPress={() => {props.navigation.navigate('StackLogin')}}
-                    />):
-                  (  <DrawerItem
-                      icon={({ size }) => (
-                          <AntDesign name="poweroff" color='#1f2233' size={size} />
-                      )}
-                      label="Đăng xuất"
-                      labelStyle={{ fontWeight: 'bold', color: '#1f2233' }}
-                  // onPress={() => {}}
-                  />)
-                }
+             <DrawerItem
+                  icon={({ size }) => (
+                      <AntDesign name="poweroff" color='#1f2233' size={size} />
+                  )}
+                  label="Đăng xuất"
+                  labelStyle={{ fontWeight: 'bold', color: '#1f2233' }}
+                  onPress={onPress}
+              />
 
             </Drawer.Section>
         </View>
