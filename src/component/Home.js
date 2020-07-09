@@ -1,9 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, StatusBar, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, StatusBar, Dimensions,AsyncStorage } from 'react-native';
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { Avatar } from 'react-native-elements';
 import BackgroundHeader from './BackgroundHeader';
 import MenuItem from './MenuItem';
-
+var jwtDecode = require('jwt-decode');
 function Home({ navigation }) {
     const [category] = React.useState([
         {
@@ -31,6 +32,28 @@ function Home({ navigation }) {
             image: require('./asset/menu4.png'),
         },
     ]);
+    const [entry, setEntry] = React.useState('');
+    const [name, setName] = React.useState('');
+    const [wallet, setWallet] = React.useState(-1);
+    const [sname, setSname] = React.useState('');
+    React.useEffect(() => {
+      if(wallet == -1){
+        const now = new Date();
+        if(now.getHours() < 5 || now.getHours() > 18) setEntry('Buổi tối ấm áp')
+        else if(now.getHours() >= 5 && now.getHours() <11) setEntry('Chào buổi sáng')
+        else setEntry('Buổi chiều vui vẻ')
+        AsyncStorage.getItem('userToken', (err, result) => {
+          var decoded = jwtDecode(result);
+            setName(decoded.name);
+            setWallet(decoded.wallet);
+        });
+      }else{
+        let subname = name.split(' ');
+        if(subname.length > 1) setSname(subname[0].charAt(0) + subname.reverse()[0].charAt(0));
+        else  setSname(subname[0].charAt(0));
+      }
+    }, [wallet]);
+
     return (
         <>
             <StatusBar barStyle="dark-content" />
@@ -38,18 +61,23 @@ function Home({ navigation }) {
                 <BackgroundHeader style={styles.bg} />
                 <View style={styles.headerContainer}>
                     <View>
-                        <Text style={styles.heading}>Hello again, </Text>
-                        <Text style={styles.desc}>Cáo Fennec</Text>
+                        <Text style={styles.heading}>{entry}</Text>
+                        <Text style={styles.desc}>{name}</Text>
                     </View>
                     <TouchableOpacity activeOpacity={0.8} onPress={() => { navigation.navigate('Profile') }}>
-                        <Image source={require('../../assets/avatar.jpg')} style={styles.img} />
+                        <Avatar
+                         size="medium"
+                          containerStyle={{backgroundColor:"#BCBEC1"}}
+                          rounded
+                          title={sname}
+                          activeOpacity={0.7}/>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.totalContainer}>
                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', }}>
                         <View style={styles.totalInfo}>
-                            <Text numberOfLines={3} style={{ color: '#068af7', fontWeight: '700', fontSize: 30 }}>$1016</Text>
-                            <Text style={{ color: '#9c9c9c' }}>in your account</Text>
+                            <Text numberOfLines={3} style={{ color: '#068af7', fontWeight: '700', fontSize: 30 }}>{wallet}đ</Text>
+                            <Text style={{ color: '#9c9c9c' }}>trong tài khoản</Text>
                         </View>
                     </View>
                     <View style={{ flex: 0.5, flexDirection: 'row', alignItems: 'center', }}>
@@ -127,12 +155,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
         marginTop: 0,
-    },
-    img: {
-        marginTop: 5,
-        width: 50,
-        height: 50,
-        borderRadius: 15,
     },
     totalContainer: {
         backgroundColor: '#fff',

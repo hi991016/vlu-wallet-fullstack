@@ -1,47 +1,67 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Image, StatusBar ,AsyncStorage} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-
+import { Avatar } from 'react-native-elements';
+var jwtDecode = require('jwt-decode');
 const ProfileScreen = ({ navigation }) => {
+  const [name, setName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [wallet, setWallet] = React.useState(-1);
+  const [sname, setSname] = React.useState('');
+  React.useEffect(() => {
+    if(wallet == -1){
+      AsyncStorage.getItem('userToken', (err, result) => {
+        var decoded = jwtDecode(result);
+          setName(decoded.name);
+          setEmail(decoded.email);
+          setWallet(decoded.wallet);
+      });
+    }else{
+      let subname = name.split(' ');
+      if(subname.length > 1) setSname(subname[0].charAt(0) + subname.reverse()[0].charAt(0));
+      else  setSname(subname[0].charAt(0));
+    }
+  }, [wallet]);
+  //  <Image source={require("./component/asset/avatar.jpg")} style={styles.image} resizeMode="center"/>
     return (
         <>
             <StatusBar barStyle="dark-content" />
             <ScrollView style={styles.scrollView}
                 showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-            >
+                showsHorizontalScrollIndicator={false}>
                 <View style={styles.container}>
                     <View style={styles.BackgroundContainer}>
                         <View style={{ alignSelf: "center" }}>
                             <View style={styles.profileImage}>
-                                <Image source={require("./component/asset/avatar.jpg")} style={styles.image} resizeMode="center" />
-                            </View>
-                            <View style={styles.edit}>
-                                <TouchableOpacity>
-                                    <AntDesign name="edit" size={20} color="#fff" style={{ marginTop: -2, marginLeft: 0 }} />
-                                </TouchableOpacity>
+                                <Avatar
+                                 size="large"
+                                  containerStyle={{backgroundColor:"#BCBEC1"}}
+                                  rounded
+                                  title={sname}
+                                  activeOpacity={0.7}/>
+
                             </View>
                         </View>
                         <View style={styles.infoContainer}>
-                            <Text style={{ color: '#1f2233', fontWeight: "200", fontSize: 23 }}>Cáo</Text>
-                            <Text style={{ color: '#1683fc', fontSize: 14 }}>phu.t170110@vanlanguni.vn</Text>
+                            <Text style={{ color: '#1f2233', fontWeight: "200", fontSize: 23 }}>{name}</Text>
+                            <Text style={{ color: '#1683fc', fontSize: 14 }}>{email}</Text>
                         </View>
                         <View style={styles.balanceContainer}>
-                            <Text style={{ fontWeight: "500", color: '#77777a', fontSize: 15 }}>Balance</Text>
+                            <Text style={{ fontWeight: "500", color: '#77777a', fontSize: 15 }}>Số dư</Text>
                             {/* style={{backgroundColor: '#0986e6', paddingHorizontal: 10, borderRadius: 120}} */}
-                            <Text style={{ fontWeight: "bold", color: "#0c1236", fontSize: 40 }}>$1016</Text>
+                            <Text style={{ fontWeight: "bold", color: "#0c1236", fontSize: 40 }}>{wallet}đ</Text>
                         </View>
                     </View>
                     <View style={styles.setting}>
+                        <TouchableOpacity onPress={()=>{navigation.navigate('Card Visit')}}>
+                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18 }]}>Xuất thông tin(QR)</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity>
-                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18 }]}>My QR Code</Text>
+                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18, marginTop: 18, }]}>Sửa thông tin cá nhân</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { navigation.navigate('ChangePassword') }}>
-                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18, marginTop: 18, }]}>Change Password</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text style={[styles.text, { color: "red", fontSize: 18, marginTop: 18, }]}>Log Out</Text>
+                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18, marginTop: 18, }]}>Đổi mật khẩu</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
