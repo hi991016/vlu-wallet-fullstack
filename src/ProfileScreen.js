@@ -1,20 +1,24 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, StatusBar ,AsyncStorage} from 'react-native';
+import { StyleSheet, Text, View, Image, StatusBar ,AsyncStorage,Alert} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-elements';
 var jwtDecode = require('jwt-decode');
+import { useFocusEffect } from '@react-navigation/native';
 const ProfileScreen = ({ navigation }) => {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [wallet, setWallet] = React.useState(-1);
+  const [avatar, setAvatar] = React.useState('');
   const [sname, setSname] = React.useState('');
+
   React.useEffect(() => {
     if(wallet == -1){
       AsyncStorage.getItem('userToken', (err, result) => {
         var decoded = jwtDecode(result);
           setName(decoded.name);
           setEmail(decoded.email);
+          setAvatar(decoded.avatar);
           setWallet(decoded.wallet);
       });
     }else{
@@ -24,6 +28,17 @@ const ProfileScreen = ({ navigation }) => {
     }
   }, [wallet]);
   //  <Image source={require("./component/asset/avatar.jpg")} style={styles.image} resizeMode="center"/>
+  useFocusEffect(
+    React.useCallback(() => {
+      AsyncStorage.getItem('userToken', (err, result) => {
+        var decoded = jwtDecode(result);
+          setName(decoded.name);
+          setEmail(decoded.email);
+          setAvatar(decoded.avatar);
+          setWallet(decoded.wallet);
+      });
+    }, [])
+  );
     return (
         <>
             <StatusBar barStyle="dark-content" />
@@ -34,13 +49,16 @@ const ProfileScreen = ({ navigation }) => {
                     <View style={styles.BackgroundContainer}>
                         <View style={{ alignSelf: "center" }}>
                             <View style={styles.profileImage}>
+                              {avatar==''?(
                                 <Avatar
                                  size="large"
                                   containerStyle={{backgroundColor:"#BCBEC1"}}
                                   rounded
                                   title={sname}
                                   activeOpacity={0.7}/>
-
+                                ):(
+                                  <Image source={{uri:avatar}} style={styles.image} resizeMode="center" />
+                                )}
                             </View>
                         </View>
                         <View style={styles.infoContainer}>
@@ -57,7 +75,7 @@ const ProfileScreen = ({ navigation }) => {
                         <TouchableOpacity onPress={()=>{navigation.navigate('Card Visit')}}>
                             <Text style={[styles.text, { color: "#1f2233", fontSize: 18 }]}>Xuất thông tin(QR)</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => { navigation.navigate('EditProfile') }} >
                             <Text style={[styles.text, { color: "#1f2233", fontSize: 18, marginTop: 18, }]}>Sửa thông tin cá nhân</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { navigation.navigate('ChangePassword') }}>
@@ -130,4 +148,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff'
     },
+    image: {
+     borderRadius: 360,
+     width: 90,
+     height: 90,
+   }
 })

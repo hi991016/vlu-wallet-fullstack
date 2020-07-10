@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground,AsyncStorage } from 'react-native';
+import { View, StyleSheet, ImageBackground,AsyncStorage,Image } from 'react-native';
 import {
     Title,
     Caption,
@@ -14,31 +14,30 @@ import {
 } from '@react-navigation/drawer';
 import { MaterialCommunityIcons, Feather, AntDesign, } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
 const DrawerContent = (props) => {
     const{onPress} = props;
     const [username, setUsername] = React.useState('');
     const [name, setName] = React.useState('');
+    const [avatar, setAvatar] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [wallet, setWallet] = React.useState(-1);
     const [point, setPoint] = React.useState(-1);
     const [sname, setSname] = React.useState('');
     React.useEffect(() => {
-      if(point == -1){
         AsyncStorage.getItem('userToken', (err, result) => {
           var decoded = jwtDecode(result);
             setUsername(decoded.user);
             setName(decoded.name);
             setEmail(decoded.email);
+            setAvatar(decoded.avatar);
             setWallet(decoded.wallet);
             setPoint(decoded.point);
         });
-      }else{
           let subname = name.split(' ');
           if(subname.length > 1) setSname(subname[0].charAt(0) + subname.reverse()[0].charAt(0));
           else  setSname(subname[0].charAt(0));
-        }
-    }, [point]);
+
+    } );
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
@@ -52,12 +51,16 @@ const DrawerContent = (props) => {
                         <View style={styles.userInfo}>
                             <View style={{ flexDirection: 'row', marginTop: 35 }}>
                                 <TouchableOpacity activeOpacity={1} onPress={() => { props.navigation.navigate('Profile') }}>
-                                    <Avatar
-                                     size="medium"
-                                      containerStyle={{backgroundColor:"#BCBEC1"}}
-                                      rounded
-                                      title={sname}
-                                      activeOpacity={0.7}/>
+                                    {avatar==''?(
+                                      <Avatar
+                                       size="medium"
+                                        containerStyle={{backgroundColor:"#BCBEC1"}}
+                                        rounded
+                                        title={sname}
+                                        activeOpacity={0.7}/>
+                                      ):(
+                                        <Image source={{uri:avatar}} style={styles.image} resizeMode="center" />
+                                      )}
                                 </TouchableOpacity>
                                 <View style={{ marginLeft: 15, flexDirection: 'column', marginTop: -4 }}>
                                     <Title style={styles.title}>{name}</Title>
@@ -178,4 +181,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 5,
     },
+    image: {
+       borderRadius: 360,
+       width: 55,
+       height: 55
+     }
 })

@@ -14,6 +14,7 @@ import HistoryScreen from './HistoryScreen';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import ChangePassword from './ChangePassword';
+import EditProfile from './EditProfile';
 
 const Tab = createBottomTabNavigator();
 
@@ -129,6 +130,16 @@ function StackProfile({ navigation }) {
                 }}
             />
             <Stack.Screen name="ChangePassword" component={ChangePassword}
+                options={{
+                    headerStyle: {
+                        backgroundColor: "#e1e6ea",
+                    },
+                    headerTitleStyle: { color: '#434c73' },
+                    headerTitleAlign: "center",
+                    headerTintColor: '#434c73',
+                }}
+            />
+            <Stack.Screen name="EditProfile" component={EditProfile}
                 options={{
                     headerStyle: {
                         backgroundColor: "#e1e6ea",

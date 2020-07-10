@@ -4,6 +4,7 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-elements';
 import BackgroundHeader from './BackgroundHeader';
 import MenuItem from './MenuItem';
+import { useFocusEffect } from '@react-navigation/native';
 var jwtDecode = require('jwt-decode');
 function Home({ navigation }) {
     const [category] = React.useState([
@@ -35,6 +36,7 @@ function Home({ navigation }) {
     const [entry, setEntry] = React.useState('');
     const [name, setName] = React.useState('');
     const [wallet, setWallet] = React.useState(-1);
+    const [avatar, setAvatar] = React.useState('');
     const [sname, setSname] = React.useState('');
     React.useEffect(() => {
       if(wallet == -1){
@@ -45,6 +47,7 @@ function Home({ navigation }) {
         AsyncStorage.getItem('userToken', (err, result) => {
           var decoded = jwtDecode(result);
             setName(decoded.name);
+            setAvatar(decoded.avatar);
             setWallet(decoded.wallet);
         });
       }else{
@@ -53,7 +56,16 @@ function Home({ navigation }) {
         else  setSname(subname[0].charAt(0));
       }
     }, [wallet]);
-
+    useFocusEffect(
+      React.useCallback(() => {
+        AsyncStorage.getItem('userToken', (err, result) => {
+          var decoded = jwtDecode(result);
+            setName(decoded.name);
+            setAvatar(decoded.avatar);
+            setWallet(decoded.wallet);
+        });
+      }, [])
+    );
     return (
         <>
             <StatusBar barStyle="dark-content" />
@@ -65,12 +77,16 @@ function Home({ navigation }) {
                         <Text style={styles.desc}>{name}</Text>
                     </View>
                     <TouchableOpacity activeOpacity={0.8} onPress={() => { navigation.navigate('Profile') }}>
-                        <Avatar
-                         size="medium"
-                          containerStyle={{backgroundColor:"#BCBEC1"}}
-                          rounded
-                          title={sname}
-                          activeOpacity={0.7}/>
+                        {avatar==''?(
+                          <Avatar
+                           size="medium"
+                            containerStyle={{backgroundColor:"#BCBEC1"}}
+                            rounded
+                            title={sname}
+                            activeOpacity={0.7}/>
+                          ):(
+                            <Image source={{uri:avatar}} style={styles.image} resizeMode="center" />
+                          )}
                     </TouchableOpacity>
                 </View>
                 <View style={styles.totalContainer}>
@@ -176,5 +192,10 @@ const styles = StyleSheet.create({
     totalInfo: {
         flex: 1,
         paddingHorizontal: 5,
-    }
+    },
+    image: {
+       borderRadius: 100,
+       width: 55,
+       height: 55
+     }
 })
