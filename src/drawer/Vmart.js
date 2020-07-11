@@ -5,57 +5,9 @@ import {  Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import { SearchBar } from 'react-native-elements';
 import VmartItem from '../component/VmartItem';
-
-const data2 = [
-    {
-        id: '1',
-        name: 'Socola',
-        price: '$5.99',
-        image: require('../../assets/socola.png'),
-    },
-    {
-        id: '2',
-        name: 'Socola',
-        price: '$5.99',
-        image: require('../../assets/socola.png'),
-    },
-    {
-        id: '3',
-        name: 'Socola',
-        price: '$5.99',
-        image: require('../../assets/socola.png'),
-    },
-    {
-        id: '4',
-        name: 'Socola',
-        price: '$5.99',
-        image: require('../../assets/socola.png'),
-    },
-    {
-        id: '5',
-        name: 'Socola',
-        price: '$5.99',
-        image: require('../../assets/socola.png'),
-    },
-    {
-        id: '6',
-        name: 'Socola',
-        price: '$5.99',
-        image: require('../../assets/socola.png'),
-    },
-    {
-        id: '7',
-        name: 'Socola',
-        price: '$5.99',
-        image: require('../../assets/socola.png'),
-    },
-    {
-        id: '8',
-        name: 'Socola',
-        price: '$5.99',
-        image: require('../../assets/socola.png'),
-    },
-]
+import * as Animatable from 'react-native-animatable';
+import LottieView from 'lottie-react-native';
+import axios from 'axios';
 
 const Stack = createStackNavigator();
 
@@ -70,19 +22,54 @@ const formatData = (data, numColumns) => {
 };
 
 function VmartScreen({ navigation }) {
+    const [products, setProducts] = React.useState([]);
+    const [fullProducts, setFullProducts] = React.useState([]);
+    const [keyword, setKeyword] = React.useState('');
+    const [load, setLoad] = React.useState(false);
+    React.useEffect(() => {
+      setLoad(true);
+      axios.get('https://vlu-ewallet.herokuapp.com/market-manager/getData').then(res =>{
+         setFullProducts(res.data);
+         setProducts(res.data);
+         setLoad(false);
+       }).catch(err =>{
+           console.error(err);
+        })
+
+    }, []);
+    function searchFilterFunction(text){
+      setKeyword(text)
+      const newData = fullProducts.filter(item => {
+        const itemData = `${item.name}` +'';
+        const textData = text.toLowerCase();
+        return itemData.toLowerCase().indexOf(textData) > -1;
+      });
+      setProducts(newData);
+    };
     return (
         <View style={styles.container}>
-            <View>
+          {load?(
+            <Animatable.View style={{alignItems:'center',justifyContent:'center',flex:1}}
+              animation='bounceIn'>
+              <LottieView style={{width:200}} source={require('../../anim/2469-dino-dance.json')} autoPlay loop />
+            </Animatable.View>
+          ):(
+            <Animatable.View animation='fadeInUpBig'>
                 <FlatList
-                    data={formatData(data2, 2)}
+                    data={formatData(products, 2)}
                     numColumns={2}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => `${item._id}`}
                     renderItem={({ item }) => <VmartItem data={item} onPress={() => {}} />}
                     contentContainerStyle={{ paddingLeft: 11, paddingRight: 11 }}
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}
+                    ListHeaderComponent={<SearchBar placeholder='Tìm kiếm...' value={keyword}
+                       containerStyle={{backgroundColor:'#fff'}}
+                       onChangeText={(text)=>searchFilterFunction(text)}
+                       lightTheme round />}
                 />
-            </View>
+            </Animatable.View>
+          )}
         </View >
     );
 }
