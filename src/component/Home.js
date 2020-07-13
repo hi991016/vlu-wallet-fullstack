@@ -4,6 +4,7 @@ import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-elements';
 import BackgroundHeader from './BackgroundHeader';
 import MenuItem from './MenuItem';
+import NumberFormat from 'react-number-format';
 import { useFocusEffect } from '@react-navigation/native';
 var jwtDecode = require('jwt-decode');
 function Home({ navigation }) {
@@ -92,7 +93,13 @@ function Home({ navigation }) {
                 <View style={styles.totalContainer}>
                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', }}>
                         <View style={styles.totalInfo}>
-                            <Text numberOfLines={3} style={{ color: '#068af7', fontWeight: '700', fontSize: 30 }}>{wallet}đ</Text>
+                            <NumberFormat
+                               value={wallet}
+                               displayType={'text'}
+                               thousandSeparator={true}
+                               suffix={' đ'}
+                               renderText={formattedValue => <Text numberOfLines={3} style={{ color: '#068af7', fontWeight: '700', fontSize: 30 }}>{formattedValue}</Text>} // <--- Don't forget this!
+                             />
                             <Text style={{ color: '#9c9c9c' }}>trong tài khoản</Text>
                         </View>
                     </View>

@@ -1,8 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View ,Alert} from 'react-native'
 import BackgroundHeader from './component/BackgroundHeader'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import IonIcons from 'react-native-vector-icons/Ionicons';
+import { useFocusEffect } from '@react-navigation/native';
 const ScanScreen = ({navigation}) => {
   const [hasPermission, setHasPermission] = React.useState(null);
   const [scanned, setScanned] = React.useState(false);
@@ -13,9 +14,24 @@ const ScanScreen = ({navigation}) => {
     })();
   }, []);
 
+  useFocusEffect(
+    React.useCallback(() => {
+        setScanned(false);
+    }, [])
+  );
     const handleBarCodeScanned = ({ type, data }) => {
       setScanned(true);
-      console.log(data)
+      if(data.indexOf('vlew')> -1) navigation.navigate('PaymentScreen',{id:data})
+      else{
+        Alert.alert(
+          'Thông báo',
+          'Vui lòng scan đúng ID giỏ hàng',
+          [{
+              text: 'OK',
+              onPress: () => setScanned(false),
+              style: 'cancel'
+            }],  { cancelable: false }
+        );}
     };
 
     if (hasPermission === null) {

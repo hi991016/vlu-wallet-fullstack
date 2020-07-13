@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, StatusBar ,AsyncStorage,Alert} from 'rea
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-elements';
+import NumberFormat from 'react-number-format';
 var jwtDecode = require('jwt-decode');
 import { useFocusEffect } from '@react-navigation/native';
 const ProfileScreen = ({ navigation }) => {
@@ -68,7 +69,13 @@ const ProfileScreen = ({ navigation }) => {
                         <View style={styles.balanceContainer}>
                             <Text style={{ fontWeight: "500", color: '#77777a', fontSize: 15 }}>Số dư</Text>
                             {/* style={{backgroundColor: '#0986e6', paddingHorizontal: 10, borderRadius: 120}} */}
-                            <Text style={{ fontWeight: "bold", color: "#0c1236", fontSize: 40 }}>{wallet}đ</Text>
+                            <NumberFormat
+                               value={wallet}
+                               displayType={'text'}
+                               thousandSeparator={true}
+                               suffix={' đ'}
+                               renderText={formattedValue => <Text style={{ fontWeight: "bold", color: "#0c1236", fontSize: 40 }}>{formattedValue}</Text>} // <--- Don't forget this!
+                             />
                         </View>
                     </View>
                     <View style={styles.setting}>

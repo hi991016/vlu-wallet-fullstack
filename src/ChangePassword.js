@@ -6,12 +6,7 @@ import {Dialog} from 'react-native-simple-dialogs';
 import axios from 'axios';
 var jwtDecode = require('jwt-decode');
     const ChangePassword = ({navigation}) => {
-      React.useEffect(() => {
-          AsyncStorage.getItem('userToken', (err, result) => {
-            var decoded = jwtDecode(result);
-              setUsername(decoded.user);
-          });
-    }, []);
+
 
     const [username, setUsername] = React.useState('');
     const [pass, setPass] = React.useState('');
@@ -24,6 +19,13 @@ var jwtDecode = require('jwt-decode');
     const [dialogVisible, setDialogVisible] = React.useState(false);
     const [changeSuccess, setChangeSuccess] = React.useState(false);
 
+    React.useEffect(() => {
+        AsyncStorage.getItem('userToken', (err, result) => {
+          var decoded = jwtDecode(result);
+            setUsername(decoded.user);
+        });
+  }, []);
+  
     function changePass(){
       let isErr = false;
       let mess = '';

@@ -3,12 +3,11 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import NumberFormat from 'react-number-format';
 const VmartItem = (props) => {
-    const { data, onPress } = props;
-    console
+    const { data } = props;
     return (
         <View style={styles.container}>
             <View style={styles.itemContainer}>
-                <TouchableOpacity activeOpacity={0.5} style={styles.itemBtn} onPress={onPress}>
+                <TouchableOpacity activeOpacity={0.5} style={styles.itemBtn} >
                     <View style={styles.item}>
                         <View style={styles.img}>
                             <Image style={styles.canteenImage} source={{uri:data.image}} />
@@ -23,7 +22,8 @@ const VmartItem = (props) => {
                                  renderText={formattedValue => <Text style={styles.price}>{formattedValue}</Text>} // <--- Don't forget this!
                                />
                             </View>
-                            <Text style={styles.name}>{data.name}</Text>
+                            {data.name.toString().length < 15 ?(<Text style={styles.name}>{data.name}</Text>):
+                              (<Text style={styles.name}>{data.name.substring(0,14) +'...'}</Text>)}
                         </View>
                     </View>
                 </TouchableOpacity>

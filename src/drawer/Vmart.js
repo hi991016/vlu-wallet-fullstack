@@ -11,14 +11,14 @@ import axios from 'axios';
 
 const Stack = createStackNavigator();
 
-const formatData = (data, numColumns) => {
-    const full = Math.floor(data.length / numColumns);
-    let numLastRow = data.length - (full * numColumns);
-    while (numLastRow !== numColumns && numLastRow !== 0) {
-        data.push({ _id: numLastRow, empty: true });
-        numLastRow++;
-    }
-    return data;
+const formatData=(data, numColumns)=>{
+  const full = Math.floor(data.length/numColumns);
+  let numLastRow = data.length - (full* numColumns);
+  while (numLastRow!== numColumns && numLastRow !==0 ) {
+    data.push({_id:numLastRow, empty:true});
+    numLastRow++;
+  }
+  return data;
 };
 
 function VmartScreen({ navigation }) {
@@ -59,7 +59,12 @@ function VmartScreen({ navigation }) {
                     data={formatData(products, 2)}
                     numColumns={2}
                     keyExtractor={item => `${item._id}`}
-                    renderItem={({ item }) => <VmartItem data={item} onPress={() => {}} />}
+                    renderItem={({ item }) => {
+                      if(item.empty === true){
+                        return<View style={{backgroundColor:'transparent',flex:1}}/>
+                      }
+                       return(<VmartItem data={item} onPress={() => {}} />);
+                     }}
                     contentContainerStyle={{ paddingLeft: 11, paddingRight: 11 }}
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}

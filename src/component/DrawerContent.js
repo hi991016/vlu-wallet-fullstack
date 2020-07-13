@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ImageBackground,AsyncStorage,Image } from 'react-native';
+import { View, StyleSheet, ImageBackground,AsyncStorage,Image,Text } from 'react-native';
 import {
     Title,
     Caption,
@@ -8,6 +8,7 @@ import {
 } from 'react-native-paper';
 import { Avatar } from 'react-native-elements';
 var jwtDecode = require('jwt-decode');
+import NumberFormat from 'react-number-format';
 import {
     DrawerContentScrollView,
     DrawerItem
@@ -70,7 +71,13 @@ const DrawerContent = (props) => {
                             <View style={styles.row}>
                                 <View style={styles.section}>
                                     <Caption style={styles.caption}>Số dư: </Caption>
-                                    <Paragraph style={[styles.paragraph, styles.caption]}>{wallet}</Paragraph>
+                                    <NumberFormat
+                                       value={wallet}
+                                       displayType={'text'}
+                                       thousandSeparator={true}
+                                       suffix={' ₫'}
+                                       renderText={formattedValue => <Text style={[styles.paragraph, styles.caption]}>{formattedValue}</Text>} // <--- Don't forget this!
+                                     />
                                 </View>
                                 <View style={styles.section}>
                                     <Caption style={styles.caption}>VPoint: </Caption>

@@ -4,6 +4,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import ScanScreen from './ScanScreen';
+import PaymentScreen from './PaymentScreen';
 import ProfileScreen from './ProfileScreen';
 import ButtonScan from './component/ButtonScan';
 import Home from './component/Home';
@@ -45,7 +46,7 @@ export default class HomeScreen extends Component {
                 }}
             >
                 <Tab.Screen name="Home" component={StackScreen} />
-                <Tab.Screen name=" " component={ScanScreen} />
+                <Tab.Screen name=" " component={StackScan} />
                 <Tab.Screen name="Profile" component={StackProfile} />
             </Tab.Navigator>
         )
@@ -148,6 +149,20 @@ function StackProfile({ navigation }) {
                     headerTitleAlign: "center",
                     headerTintColor: '#434c73',
                 }}
+            />
+        </Stack.Navigator>
+    )
+}
+
+
+function StackScan({ navigation }) {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="CameraScan" component={ScanScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen name="PaymentScreen" component={PaymentScreen}
+                options={{headerShown: false}}
             />
         </Stack.Navigator>
     )
