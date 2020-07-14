@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import ScanScreen from './ScanScreen';
 import PaymentScreen from './PaymentScreen';
 import ProfileScreen from './ProfileScreen';
@@ -12,6 +13,7 @@ import PayNowScreen from './PayNowScreen';
 import AddMoneyScreen from './AddMoneyScreen';
 import CardScreen from './CardScreen';
 import HistoryScreen from './HistoryScreen';
+import Infochart from './Infochart';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Feather, Ionicons } from '@expo/vector-icons';
 import ChangePassword from './ChangePassword';
@@ -99,18 +101,22 @@ function StackScreen({ navigation }) {
                     headerTintColor: '#434c73',
                 }}
             />
-            <Stack.Screen name="History" component={HistoryScreen}
-                options={{
-                    headerStyle: {
-                        backgroundColor: "#e1e6ea",
-                    },
-                    headerTitleStyle: { color: '#434c73' },
-                    headerTitleAlign: "center",
-                    headerTintColor: '#434c73',
-                }}
+            <Stack.Screen name="History" component={HistoryTab}
+                options={{headerShown:false}}
             />
         </Stack.Navigator>
     )
+}
+
+const TopTab = createMaterialTopTabNavigator();
+
+function HistoryTab({ navigation }) {
+  return (
+    <TopTab.Navigator>
+      <TopTab.Screen name="Lịch sử" component={HistoryScreen} />
+      <TopTab.Screen name="Thống kê" component={Infochart} />
+    </TopTab.Navigator>
+  );
 }
 
 function StackProfile({ navigation }) {

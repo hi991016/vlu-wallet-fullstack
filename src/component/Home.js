@@ -36,6 +36,7 @@ function Home({ navigation }) {
     ]);
     const [entry, setEntry] = React.useState('');
     const [name, setName] = React.useState('');
+    const [username, setUsername] = React.useState('');
     const [wallet, setWallet] = React.useState(-1);
     const [avatar, setAvatar] = React.useState('');
     const [sname, setSname] = React.useState('');
@@ -49,6 +50,7 @@ function Home({ navigation }) {
           var decoded = jwtDecode(result);
             setName(decoded.name);
             setAvatar(decoded.avatar);
+            setUsername(decoded.user);
             setWallet(decoded.wallet);
         });
       }else{
