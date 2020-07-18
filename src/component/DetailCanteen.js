@@ -3,74 +3,73 @@ import { StyleSheet, Text, View, Image, StatusBar, Alert } from 'react-native'
 import InputSpinner from "react-native-input-spinner";
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import BackgroundOval from './BackgroundOval';
-
-class DetailCanteen extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: 1,
-        };
-    }
-    render() {
-        return (
-            <>
-                <StatusBar barStyle="dark-content" />
-                <ScrollView style={styles.scrollview}>
-                    <View style={styles.container}>
-                        <BackgroundOval />
-                        <View styles={styles.img}>
-                            <Image style={styles.imgSize} source={require('../../assets/rice.png')} />
-                        </View>
-                        <View style={{ marginHorizontal: 30 }}>
-                            <Text style={styles.desc}>Rice with Grilled Pork Chop</Text>
-                        </View>
-                        <View style={styles.info}>
-                            <InputSpinner
-                                max={10}
-                                min={1}
-                                step={1}
-                                value={this.state.value}
-                                onChange={(num) => {
-                                    console.log(num);
-                                }}
-                                rounded={false}
-                                style={styles.quantity}
-                                borderRadius
-                                color={'#fff'}
-                                fontSize={18}
-                                buttonLeftImage={
-                                    <Image
-                                        style={{ width: 12, height: 12 }}
-                                        source={
-                                            require('../../assets/minus.png')
-                                        }
-                                    />
-                                }
-                                buttonRightImage={
-                                    <Image
-                                        style={{ width: 12, height: 12 }}
-                                        source={
-                                            require('../../assets/plus.png')
-                                        }
-                                    />
-                                }
-                            />
-                            <Text style={styles.price}>$7.99</Text>
-                        </View>
-                        <View style={{ alignSelf: 'center' }}>
-                            <TouchableOpacity activeOpacity={0.7} onPress={() => this.props.navigation.goBack()}>
-                                <View style={styles.customButton}>
-                                    <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>
-                                        Add to Cart
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </ScrollView>
-            </>
-        )
-    }
+import NumberFormat from 'react-number-format';
+const DetailCanteen = ({navigation,route}) => {
+    const [value, setValue] = React.useState(1);
+    return (
+      <>
+          <StatusBar barStyle="dark-content" />
+          <ScrollView style={styles.scrollview}>
+              <View style={styles.container}>
+                  <BackgroundOval />
+                  <View styles={styles.img}>
+                      <Image style={styles.imgSize} source={{uri:route.params.detail.image}} />
+                  </View>
+                  <View style={{ marginHorizontal: 30 }}>
+                      <Text style={styles.desc}>{route.params.detail.name}</Text>
+                  </View>
+                  <View style={styles.info}>
+                      <InputSpinner
+                          max={10}
+                          min={1}
+                          step={1}
+                          value={value}
+                          onChange={(num) => {
+                            setValue(num);
+                          }}
+                          rounded={false}
+                          style={styles.quantity}
+                          borderRadius
+                          color={'#fff'}
+                          fontSize={18}
+                          buttonLeftImage={
+                              <Image
+                                  style={{ width: 12, height: 12 }}
+                                  source={
+                                      require('../../assets/minus.png')
+                                  }
+                              />
+                          }
+                          buttonRightImage={
+                              <Image
+                                  style={{ width: 12, height: 12 }}
+                                  source={
+                                      require('../../assets/plus.png')
+                                  }
+                              />
+                          }
+                      />
+                      <NumberFormat
+                         value={route.params.detail.price}
+                         displayType={'text'}
+                         thousandSeparator={true}
+                         suffix={' ₫'}
+                         renderText={formattedValue => <Text style={styles.price}>{formattedValue}</Text>} // <--- Don't forget this!
+                       />
+                  </View>
+                  <View style={{ alignSelf: 'center' }}>
+                      <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('Canteen',{item:route.params.detail,value:value})}>
+                          <View style={styles.customButton}>
+                              <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>
+                                  Thêm vào giỏ
+                              </Text>
+                          </View>
+                      </TouchableOpacity>
+                  </View>
+              </View>
+          </ScrollView>
+      </>
+    )
 }
 
 export default DetailCanteen

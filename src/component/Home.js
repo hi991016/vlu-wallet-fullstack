@@ -39,6 +39,7 @@ function Home({ navigation }) {
     const [username, setUsername] = React.useState('');
     const [wallet, setWallet] = React.useState(-1);
     const [avatar, setAvatar] = React.useState('');
+    const [active, setActive] = React.useState(true);
     const [sname, setSname] = React.useState('');
     React.useEffect(() => {
       if(wallet == -1){
@@ -66,6 +67,7 @@ function Home({ navigation }) {
             setName(decoded.name);
             setAvatar(decoded.avatar);
             setWallet(decoded.wallet);
+            setActive(decoded.active)
         });
       }, [])
     );
@@ -93,21 +95,31 @@ function Home({ navigation }) {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.totalContainer}>
-                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', }}>
-                        <View style={styles.totalInfo}>
-                            <NumberFormat
-                               value={wallet}
-                               displayType={'text'}
-                               thousandSeparator={true}
-                               suffix={' đ'}
-                               renderText={formattedValue => <Text numberOfLines={3} style={{ color: '#068af7', fontWeight: '700', fontSize: 30 }}>{formattedValue}</Text>} // <--- Don't forget this!
-                             />
-                            <Text style={{ color: '#9c9c9c' }}>trong tài khoản</Text>
-                        </View>
+                  {active?(
+                    <>
+                      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', }}>
+                          <View style={styles.totalInfo}>
+                              <NumberFormat
+                                 value={wallet}
+                                 displayType={'text'}
+                                 thousandSeparator={true}
+                                 suffix={' đ'}
+                                 renderText={formattedValue => <Text numberOfLines={3} style={{ color: '#068af7', fontWeight: '700', fontSize: 30 }}>{formattedValue}</Text>} // <--- Don't forget this!
+                               />
+                              <Text style={{ color: '#9c9c9c' }}>trong tài khoản</Text>
+                          </View>
+                      </View>
+                      <View style={{ flex: 0.5, flexDirection: 'row', alignItems: 'center', }}>
+                          <Image source={require('../../assets/savemoney.jpg')} style={styles.img2} />
+                      </View>
+                    </>
+                  ):(
+                    <View style={{flexDirection:'column'}}>
+                      <Text style={{ color: '#068af7', fontWeight: '700', fontSize: 25 }}>Bạn cần kích hoạt tài khoản!</Text>
+                      <Text style={{ color: '#9c9c9c' }}>Liên hệ với khoa để được xác thực nhé</Text>
                     </View>
-                    <View style={{ flex: 0.5, flexDirection: 'row', alignItems: 'center', }}>
-                        <Image source={require('../../assets/savemoney.jpg')} style={styles.img2} />
-                    </View>
+                  )}
+
                 </View>
                 <View style={styles.ListItem}>
                     <View >

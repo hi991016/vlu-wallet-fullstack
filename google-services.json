@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "423817307282",
+    "firebase_url": "https://vanlang-ewallet.firebaseio.com",
+    "project_id": "vanlang-ewallet",
+    "storage_bucket": "vanlang-ewallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423817307282:android:ef5b199e16a5882c2cb24b",
+        "android_client_info": {
+          "package_name": "com.team04vlu.vanlang_ewallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423817307282-2342igh91hkafa0g44ouqf5f42v4ffhe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP6okmeFCusAORRmfa3cMSLZY-Bm59c5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423817307282-2342igh91hkafa0g44ouqf5f42v4ffhe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

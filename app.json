@@ -1,19 +1,28 @@
 {
   "expo": {
-    "name": "temp-wallet",
-    "slug": "temp-wallet",
+    "name": "VanLang EWallet",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
+      "android": {
+      "package": "com.team04vlu.vanlang_ewallet",
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSyAP6okmeFCusAORRmfa3cMSLZY-Bm59c5k"
+        }
+      },
+      "versionCode": 1
+    },
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo_app.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo-transparent.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#4388D6"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

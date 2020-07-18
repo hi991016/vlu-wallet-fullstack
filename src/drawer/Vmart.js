@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,RefreshControl } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import {  Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
@@ -26,6 +26,19 @@ function VmartScreen({ navigation }) {
     const [fullProducts, setFullProducts] = React.useState([]);
     const [keyword, setKeyword] = React.useState('');
     const [load, setLoad] = React.useState(false);
+    const [refreshing, setRefreshing] = React.useState(false);
+    const onRefresh = React.useCallback(() => {
+      setRefreshing(true);
+      setLoad(true);
+      axios.get('https://vlu-ewallet.herokuapp.com/market-manager/getData').then(res =>{
+          setProducts(res.data);
+          setFullProducts(res.data);
+          setLoad(false);
+       }).catch(err =>{
+           console.error(err);
+        })
+        setRefreshing(false);
+    }, []);
     React.useEffect(() => {
       setLoad(true);
       axios.get('https://vlu-ewallet.herokuapp.com/market-manager/getData').then(res =>{
@@ -58,6 +71,8 @@ function VmartScreen({ navigation }) {
                 <FlatList
                     data={formatData(products, 2)}
                     numColumns={2}
+                    refreshControl={
+                    <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                     keyExtractor={item => `${item._id}`}
                     renderItem={({ item }) => {
                       if(item.empty === true){

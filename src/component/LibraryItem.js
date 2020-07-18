@@ -1,22 +1,29 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import NumberFormat from 'react-number-format';
 const LibraryItem = (props) => {
-    const { data, onPress } = props;
+    const { data } = props;
     return (
         <View style={styles.container}>
             <View style={styles.itemContainer}>
-                <TouchableOpacity activeOpacity={0.5} style={styles.itemBtn} onPress={onPress}>
+                <TouchableOpacity activeOpacity={0.5} style={styles.itemBtn} >
                     <View style={styles.item}>
                         <View style={styles.img}>
-                            <Image style={styles.LibraryImage} source={data.image} />
+                            <Image style={styles.canteenImage} source={{uri:data.image}} />
                         </View>
                         <View style={styles.info}>
                             <View style={styles.priceRow}>
-                                <Text style={styles.price}>{data.price}</Text>
+                              <NumberFormat
+                                 value={data.price}
+                                 displayType={'text'}
+                                 thousandSeparator={true}
+                                 suffix={' ₫'}
+                                 renderText={formattedValue => <Text style={styles.price}>{formattedValue}</Text>} // <--- Don't forget this!
+                               />
                             </View>
-                            <Text style={styles.name}>{data.name}</Text>
+                            {data.name.toString().length < 15 ?(<Text style={styles.name}>{data.name}</Text>):
+                              (<Text style={styles.name}>{data.name.substring(0,14) +'...'}</Text>)}
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -67,7 +74,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginBottom: 10,
     },
-    LibraryImage: {
+    canteenImage: {
         width: 130,
         height: 130,
     },
