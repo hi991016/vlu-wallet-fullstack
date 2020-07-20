@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   footer:{
-    flex:2,
+    flex: 2.5,
     backgroundColor:'#fff',
     borderTopLeftRadius:30,
     borderTopRightRadius:30,
@@ -98,10 +98,10 @@ const styles = StyleSheet.create({
     marginTop:20
   },
   signup:{
-    borderRadius:25,
+    borderRadius: 30,
     alignItems:'center',
     justifyContent:'center',
-    height:50,
+    height: 60,
     backgroundColor:'black',
     flexDirection:"row",
     marginVertical:10
@@ -112,10 +112,10 @@ const styles = StyleSheet.create({
   },
   signin:{
     borderWidth:3,
-    borderRadius:25,
+    borderRadius: 30,
     alignItems:'center',
     justifyContent:'center',
-    height:50,
+    height: 60,
     flexDirection:"row",
     marginVertical:10
   },
