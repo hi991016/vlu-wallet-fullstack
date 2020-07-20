@@ -11,13 +11,13 @@ function Home({ navigation }) {
     const [category] = React.useState([
         {
             id: '1',
-            title: 'Pay Now',
+            title: 'Voucher',
             icon: require('./asset/payment.png'),
             image: require('./asset/menu1.png'),
         },
         {
             id: '2',
-            title: 'Add Money',
+            title: 'Ví tiền',
             icon: require('./asset/paynow.png'),
             image: require('./asset/menu2.png'),
         },
@@ -29,7 +29,7 @@ function Home({ navigation }) {
         },
         {
             id: '4',
-            title: 'History',
+            title: 'Lịch sử giao dịch',
             icon: require('./asset/history.png'),
             image: require('./asset/menu4.png'),
         },
@@ -123,7 +123,7 @@ function Home({ navigation }) {
                 </View>
                 <View style={styles.ListItem}>
                     <View >
-                        <Text style={styles.option}>Select an Option</Text>
+                        <Text style={styles.option}>Bạn đang cần gì?</Text>
                     </View>
                     <View>
                     <FlatList

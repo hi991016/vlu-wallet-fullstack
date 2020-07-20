@@ -14,9 +14,9 @@
           "apiKey": "AIzaSyAP6okmeFCusAORRmfa3cMSLZY-Bm59c5k"
         }
       },
-      "versionCode": 1
+      "versionCode": 2
     },
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/logo_app.png",
     "splash": {

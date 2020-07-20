@@ -21,7 +21,10 @@ const ScanScreen = ({navigation}) => {
   );
     const handleBarCodeScanned = ({ type, data }) => {
       setScanned(true);
-      if(data.indexOf('vlew')> -1) navigation.navigate('PaymentScreen',{id:data})
+      if(data.indexOf('vlew')> -1){
+        if(data.length>13) navigation.navigate('PaymentParking',{id:data});
+        else navigation.navigate('PaymentScreen',{id:data});
+      }
       else{
         Alert.alert(
           'Thông báo',

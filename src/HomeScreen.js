@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import ScanScreen from './ScanScreen';
+import PaymentParking from './PaymentParking';
 import PaymentScreen from './PaymentScreen';
 import ProfileScreen from './ProfileScreen';
 import ButtonScan from './component/ButtonScan';
@@ -73,6 +74,7 @@ function StackScreen({ navigation }) {
             />
             <Stack.Screen name="Pay Now" component={PayNowScreen}
                 options={{
+                    title:'Voucher',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
@@ -83,6 +85,7 @@ function StackScreen({ navigation }) {
             />
             <Stack.Screen name="Add Money" component={AddMoneyScreen}
                 options={{
+                    title:'Số dư',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
@@ -124,6 +127,7 @@ function StackProfile({ navigation }) {
         <Stack.Navigator>
             <Stack.Screen name="Profile" component={ProfileScreen}
                 options={{
+                    title:'Thông tin',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
@@ -138,6 +142,7 @@ function StackProfile({ navigation }) {
             />
             <Stack.Screen name="ChangePassword" component={ChangePassword}
                 options={{
+                    title:'Đổi password',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
@@ -148,6 +153,7 @@ function StackProfile({ navigation }) {
             />
             <Stack.Screen name="EditProfile" component={EditProfile}
                 options={{
+                    title:'Sửa thông tin',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
@@ -165,6 +171,9 @@ function StackScan({ navigation }) {
     return (
         <Stack.Navigator>
             <Stack.Screen name="CameraScan" component={ScanScreen}
+                options={{headerShown: false}}
+            />
+            <Stack.Screen name="PaymentParking" component={PaymentParking}
                 options={{headerShown: false}}
             />
             <Stack.Screen name="PaymentScreen" component={PaymentScreen}
