@@ -42,7 +42,7 @@ const ProfileScreen = ({ navigation }) => {
   );
     return (
         <>
-            <StatusBar barStyle="dark-content" />
+            <StatusBar barStyle="light-content" />
             <ScrollView style={styles.scrollView}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}>
@@ -80,13 +80,13 @@ const ProfileScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.setting}>
                         <TouchableOpacity onPress={()=>{navigation.navigate('Card Visit')}}>
-                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18 }]}>Xuất thông tin(QR)</Text>
+                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18 }]}>Xuất Thông Tin (QR)</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { navigation.navigate('EditProfile') }} >
-                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18, marginTop: 18, }]}>Sửa thông tin cá nhân</Text>
+                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18, marginTop: 18, }]}>Chỉnh Sửa Thông Tin </Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { navigation.navigate('ChangePassword') }}>
-                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18, marginTop: 18, }]}>Đổi mật khẩu</Text>
+                            <Text style={[styles.text, { color: "#1f2233", fontSize: 18, marginTop: 18, }]}>Đổi Mật Khẩu</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

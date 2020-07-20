@@ -55,10 +55,10 @@ function SignIn({ navigation }) {
   return (
     <View style={styles.containerlogin}>
       <StatusBar barStyle='light-content' />
-      <Dialog dialogStyle={{ backgroundColor: 'transparent' }} visible={dialogVisible}>
+      <Dialog dialogStyle={{ backgroundColor: 'transparent', elevation: 0 }} visible={dialogVisible}>
         <Animatable.View
           animation='fadeInUpBig'>
-          <LottieView style={{ width: 300 }} source={require('./anim/51-preloader.json')} autoPlay loop />
+          <LottieView style={{ width: 210, alignSelf: 'center' }} source={require('./anim/14742-create-wallet.json')} autoPlay loop />
         </Animatable.View>
       </Dialog>
       <View style={styles.header}>
@@ -81,8 +81,8 @@ function SignIn({ navigation }) {
             <TouchableOpacity onPress={() => navigation.navigate('LoginSplash')}>
               <FontAwesome5 name="chevron-left" size={24} color="#000" style={{ paddingHorizontal: 0 }} />
             </TouchableOpacity>
-            <View style={{ flex: 1, alignItems: 'center', }}>
-              <Text style={styles.textSignin}>Đăng nhập</Text>
+            <View style={{ flex: 1, alignItems: 'center' }}>
+              <Text style={styles.textSignin}>Đăng Nhập</Text>
             </View>
           </View>
           {errUsername ? (
@@ -214,7 +214,7 @@ export default function App({ navigation }) {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
       <NavigationContainer style={styles.container}>
         {state.isLoading ? (undefined
           //   <Stack.Navigator>
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
   },
   inputErr: {
     borderColor: 'red',
-    borderWidth: 3,
+    borderWidth: 2.5,
     borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
@@ -301,6 +301,6 @@ const styles = StyleSheet.create({
   },
   textSignup: {
     color: 'white',
-    fontSize: 20
+    fontSize: 19
   }
 });

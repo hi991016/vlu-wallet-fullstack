@@ -100,7 +100,7 @@ const DrawerContent = (props) => {
                             icon={({ size }) => (
                                 <AntDesign name="user" color='#1f2233' size={size} />
                             )}
-                            label="Thông tin tài khoản"
+                            label="Thông Tin Tài Khoản"
                             onPress={() => { props.navigation.navigate('Profile') }}
                             labelStyle={{ color: '#1f2233' }}
                         />
@@ -108,7 +108,7 @@ const DrawerContent = (props) => {
                             icon={({ size }) => (
                                 <MaterialCommunityIcons name="food" color='#1f2233' size={size} />
                             )}
-                            label="Căn tin"
+                            label="Căn Tin"
                             onPress={() => { props.navigation.navigate('Canteen') }}
                             labelStyle={{ color: '#1f2233' }}
                         />
@@ -124,7 +124,7 @@ const DrawerContent = (props) => {
                             icon={({ size }) => (
                                 <Feather name="book" color='#1f2233' size={size} />
                             )}
-                            label="Thư viện"
+                            label="Thư Viện"
                             onPress={() => { props.navigation.navigate('Library') }}
                             labelStyle={{ color: '#1f2233' }}
                         />
@@ -136,7 +136,7 @@ const DrawerContent = (props) => {
                   icon={({ size }) => (
                       <AntDesign name="poweroff" color='#1f2233' size={size} />
                   )}
-                  label="Đăng xuất"
+                  label="Đăng Xuất"
                   labelStyle={{ fontWeight: 'bold', color: '#1f2233' }}
                   onPress={onPress}
               />

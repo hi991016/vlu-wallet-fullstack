@@ -179,7 +179,7 @@ function CanteenScreen({ navigation ,route}) {
   }
     return (
       <>
-          <StatusBar barStyle="dark-content" />
+          <StatusBar barStyle="light-content" />
           <View style={styles.container}>
             {load?(
               <Animatable.View style={{alignItems:'center',justifyContent:'center',flex:1}}
@@ -334,7 +334,7 @@ const Canteen = ({ navigation }) => {
                 name="Canteen"
                 component={CanteenScreen}
                 options={{
-                    title: 'Canteen',
+                    title: 'Căn Tin',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },

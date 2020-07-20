@@ -22,10 +22,10 @@ function SignUp({ navigation }) {
 
     <View style={styles.container}>
       <StatusBar barStyle='light-content' />
-      <Dialog dialogStyle={{ backgroundColor: 'transparent' }} visible={dialogVisible}>
+      <Dialog dialogStyle={{ backgroundColor: 'transparent', elevation: 0 }} visible={dialogVisible}>
         <Animatable.View
           animation='fadeInUpBig'>
-          <LottieView style={{ width: 300 }} source={require('../../anim/51-preloader.json')} autoPlay loop />
+          <LottieView style={{ width: 300, alignSelf: 'center' }} source={require('../../anim/51-preloader.json')} autoPlay loop />
         </Animatable.View>
       </Dialog>
       <View style={styles.header}>
@@ -48,8 +48,8 @@ function SignUp({ navigation }) {
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <FontAwesome5 name="chevron-left" size={24} color="#000" style={{ paddingHorizontal: 0 }} />
             </TouchableOpacity>
-            <View style={{ flex: 1, alignItems: 'center', marginRight: 15, }}>
-              <Text style={styles.textSinup}>Đăng ký</Text>
+            <View style={{ flex: 1, alignItems: 'center', }}>
+              <Text style={styles.textSinup}>Đăng Ký</Text>
             </View>
           </View>
           {errName ? (
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingTop: 25,
-    paddingHorizontal: 20
+    paddingHorizontal: 30
   },
   text_head: {
     color: 'white',
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
   },
   textSignup: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 18,
   }
 });
 

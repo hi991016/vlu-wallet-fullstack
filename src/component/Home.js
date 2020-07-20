@@ -17,7 +17,7 @@ function Home({ navigation }) {
         },
         {
             id: '2',
-            title: 'Ví tiền',
+            title: 'Ví Tiền',
             icon: require('./asset/paynow.png'),
             image: require('./asset/menu2.png'),
         },
@@ -29,7 +29,7 @@ function Home({ navigation }) {
         },
         {
             id: '4',
-            title: 'Lịch sử giao dịch',
+            title: 'Lịch Sử',
             icon: require('./asset/history.png'),
             image: require('./asset/menu4.png'),
         },
@@ -73,7 +73,7 @@ function Home({ navigation }) {
     );
     return (
         <>
-            <StatusBar barStyle="dark-content" />
+            <StatusBar barStyle="light-content" />
             <View style={styles.container}>
                 <BackgroundHeader style={styles.bg} />
                 <View style={styles.headerContainer}>

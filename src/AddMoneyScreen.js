@@ -38,7 +38,7 @@ const AddMoneyScreen = ({navigation}) => {
                   </View>
                 ):(
                   <View style={styles.inside}>
-                      <Text style={{ color: '#fff', fontSize: 15 }}>Số dư</Text>
+                      <Text style={{ color: '#fff', fontSize: 15 }}>Số Dư</Text>
                       <View style={{ paddingHorizontal: 20 }}>
                       <NumberFormat
                          value={wallet}
@@ -60,7 +60,7 @@ const AddMoneyScreen = ({navigation}) => {
                 <TouchableOpacity activeOpacity={0.7} onPress={()=>checkMoney()}>
                     <View style={styles.customButton}>
                         <Text style={{ color: '#fff', fontSize: 16, fontWeight: '800' }}>
-                            Kiểm tra tiền
+                            Kiểm Tra Tiền
                         </Text>
                     </View>
                 </TouchableOpacity>

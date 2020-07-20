@@ -85,7 +85,7 @@ function StackScreen({ navigation }) {
             />
             <Stack.Screen name="Add Money" component={AddMoneyScreen}
                 options={{
-                    title:'Số dư',
+                    title:'Ví Tiền',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
@@ -127,7 +127,7 @@ function StackProfile({ navigation }) {
         <Stack.Navigator>
             <Stack.Screen name="Profile" component={ProfileScreen}
                 options={{
-                    title:'Thông tin',
+                    title:'Thông tin tài khoản',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
@@ -142,7 +142,7 @@ function StackProfile({ navigation }) {
             />
             <Stack.Screen name="ChangePassword" component={ChangePassword}
                 options={{
-                    title:'Đổi password',
+                    title:'Đổi mật khẩu',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
@@ -153,7 +153,7 @@ function StackProfile({ navigation }) {
             />
             <Stack.Screen name="EditProfile" component={EditProfile}
                 options={{
-                    title:'Sửa thông tin',
+                    title:'Chỉnh sửa thông tin',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },

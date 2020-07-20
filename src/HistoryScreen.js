@@ -30,7 +30,7 @@ const HistoryScreen = ({navigation}) => {
   }, [username]);
   return (
           <>
-            <StatusBar barStyle="dark-content" />
+            <StatusBar barStyle="light-content" />
             {load?(
               <Animatable.View style={{alignItems:'center',justifyContent:'center',flex:1}}
                 animation='bounceIn'>

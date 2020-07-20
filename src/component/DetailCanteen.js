@@ -8,7 +8,7 @@ const DetailCanteen = ({navigation,route}) => {
     const [value, setValue] = React.useState(1);
     return (
       <>
-          <StatusBar barStyle="dark-content" />
+          <StatusBar barStyle="light-content" />
           <ScrollView style={styles.scrollview}>
               <View style={styles.container}>
                   <BackgroundOval />

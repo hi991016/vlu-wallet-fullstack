@@ -101,7 +101,7 @@ const Library = ({ navigation }) => {
                 name="Library"
                 component={LibraryScreen}
                 options={{
-                    title: 'Library',
+                    title: 'Thư Viện',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
