@@ -7,7 +7,7 @@ const CartItem = (props) => {
     return (
       <View style={styles.panelCart}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              <Text style={{ color: '#fff', fontSize: 17 }}>{data.amount}x</Text>
+              <Text style={{ color: '#fff', fontSize: 17 }}>{data.amount}     x</Text>
           </View>
           <View style={{  paddingHorizontal: 25 }}>
               <Text numberOfLines={3} style={{ color: '#fff', fontSize: 17, fontWeight: 'bold' }}>{data.name}</Text>

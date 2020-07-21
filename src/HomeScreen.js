@@ -85,7 +85,7 @@ function StackScreen({ navigation }) {
             />
             <Stack.Screen name="Add Money" component={AddMoneyScreen}
                 options={{
-                    title:'Ví Tiền',
+                    title:'Ví tiền',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },
@@ -96,6 +96,7 @@ function StackScreen({ navigation }) {
             />
             <Stack.Screen name="Card Visit" component={CardScreen}
                 options={{
+                    title:'Card visit',
                     headerStyle: {
                         backgroundColor: "#e1e6ea",
                     },

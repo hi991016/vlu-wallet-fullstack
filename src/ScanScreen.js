@@ -46,14 +46,14 @@ const ScanScreen = ({navigation}) => {
 
     return (
         <>
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#000' }}>
               <BarCodeScanner
                 style={{position:'absolute'}}
                 barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
                 onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={StyleSheet.absoluteFillObject}
               />
-              <IonIcons name='ios-qr-scanner' size={300} color='#fff' />
+              <IonIcons name='ios-qr-scanner' size={280} color='#fff' />
             </View>
         </>
     )

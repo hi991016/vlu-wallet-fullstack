@@ -100,7 +100,7 @@ const ChangePassword = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           ) : (
-              <LottieView style={{ width: 300 }} source={require('../anim/51-preloader.json')} autoPlay loop />
+              <LottieView style={{ width: 300, alignSelf: 'center' }} source={require('../anim/51-preloader.json')} autoPlay loop />
             )}
         </Animatable.View>
       </Dialog>
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 60,
     flexDirection: "row",
-    marginVertical: 8
+    marginVertical: 5
   },
   inputErr: {
     borderColor: 'red',

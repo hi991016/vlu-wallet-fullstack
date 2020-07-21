@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         marginTop: 60,
         width: 300,
         height: 300,
-        borderRadius: 120,
+        borderRadius: 360,
     },
     price: {
         fontSize: 29,

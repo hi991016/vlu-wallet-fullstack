@@ -92,7 +92,7 @@ const DrawerContent = (props) => {
                             icon={({ size }) => (
                                 <AntDesign name="home" color='#1f2233' size={size} />
                             )}
-                            label="Trang chủ"
+                            label="Trang Chủ"
                             onPress={() => { props.navigation.navigate('Home') }}
                             labelStyle={{ color: '#1f2233' }}
                         />
