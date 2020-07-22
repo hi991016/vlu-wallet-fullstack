@@ -188,7 +188,7 @@ function CanteenScreen({ navigation, route }) {
           </Animatable.View>
         ) : (
             <Animatable.View animation='fadeInUpBig' style={{ flex: 1 }}>
-              <Dialog visible={dialogVisible}>
+              <Dialog visible={dialogVisible} dialogStyle={{ backgroundColor: 'transparent', elevation: 0 }}>
                 <Animatable.View
                   animation='fadeInUpBig'>
                   <LottieView style={{ width: 300, alignSelf: 'center' }} source={require('../../anim/51-preloader.json')} autoPlay loop />
@@ -314,7 +314,7 @@ function CanteenScreen({ navigation, route }) {
                             <TouchableOpacity activeOpacity={0.7} onPress={() => order()}>
                               <View style={styles.customButton}>
                                 <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>
-                                  Đặt hàng
+                                  Đặt món
                                 </Text>
                               </View>
                             </TouchableOpacity>

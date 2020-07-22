@@ -60,8 +60,8 @@ const DetailCanteen = ({navigation,route}) => {
                   <View style={{ alignSelf: 'center' }}>
                       <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('Canteen',{item:route.params.detail,value:value})}>
                           <View style={styles.customButton}>
-                              <Text style={{ color: '#000', fontSize: 16, fontWeight: 'bold' }}>
-                                  Thêm vào giỏ
+                              <Text style={{ color: '#000', fontSize: 16.5, fontWeight: 'bold' }}>
+                                  Thêm vào giỏ hàng
                               </Text>
                           </View>
                       </TouchableOpacity>
