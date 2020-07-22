@@ -102,7 +102,7 @@ const PaymentParking = ({navigation,route}) => {
                             </View>
                           </TouchableOpacity>
                         ):(
-                          <LottieView style={{width:300}} source={require('../anim/51-preloader.json')} autoPlay loop />
+                          <LottieView style={{width:300, alignSelf: 'center'}} source={require('../anim/51-preloader.json')} autoPlay loop />
                         )}
                       </Animatable.View>
                     </Dialog>
