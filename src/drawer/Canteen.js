@@ -307,7 +307,7 @@ function CanteenScreen({ navigation, route }) {
                             >
                               <View style={styles.customRemove}>
                                 <Text style={{ color: '#febc40', fontSize: 16, fontWeight: 'bold' }}>
-                                  Xóa
+                                  Hủy
                                 </Text>
                               </View>
                             </TouchableOpacity>
@@ -342,7 +342,7 @@ const Canteen = ({ navigation }) => {
         name="Canteen"
         component={CanteenScreen}
         options={{
-          title: 'Căn Tin',
+          title: 'Căn tin',
           headerStyle: {
             backgroundColor: "#e1e6ea",
           },
@@ -465,7 +465,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    width: 60,
+    width: 70,
     height: 50,
     borderColor: '#febc40',
     borderWidth: 2,
